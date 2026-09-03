@@ -52,6 +52,36 @@
   .nav-links a:hover{color:var(--gold)}
   .nav-cta{background:var(--gold-deep);color:var(--ink);padding:10px 18px;border-radius:30px;font-weight:700;text-decoration:none;font-size:14px;box-shadow:0 6px 18px rgba(229,196,85,.3)}
   .nav-cta:hover{background:#f5d878}
+  .nav-cta.reg{background:var(--green-light);color:#fff;box-shadow:0 6px 18px rgba(12,166,107,.35)}
+  .nav-cta.reg:hover{background:#11bd7c}
+
+  /* ===== Registration Modal ===== */
+  .reg-modal-box{position:relative;width:min(560px,95vw);max-height:92vh;overflow-y:auto;background:linear-gradient(165deg,#0a4d3a,#05281d);
+    border:1px solid rgba(240,211,109,.4);border-radius:24px;padding:28px 26px 26px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:popIn .35s ease}
+  .reg-head{text-align:center;margin-bottom:18px}
+  .reg-head .shield-ic{width:54px;height:54px;margin:0 auto 8px;display:block}
+  .reg-head h3{font-size:22px;color:var(--gold);font-weight:800;margin-bottom:4px}
+  .reg-head p{font-size:14px;color:var(--muted)}
+  .reg-field{margin-bottom:13px}
+  .reg-field label{display:block;font-size:13px;color:var(--accent);font-weight:700;margin-bottom:5px}
+  .reg-field label span{color:var(--gold);font-size:11px;font-weight:600}
+  .reg-field input,.reg-field select{width:100%;padding:12px 14px;border-radius:11px;border:1px solid rgba(255,255,255,.16);background:rgba(3,28,20,.65);
+    color:#fff;font-size:15px;font-family:inherit;transition:.2s}
+  .reg-field select{appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f0d36d' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+  .reg-field select option{color:#0d2a1e;background:#fff}
+  .reg-field input:focus,.reg-field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(73,217,151,.18)}
+  .reg-field input::placeholder{color:#7fb59c}
+  .reg-field select:disabled{opacity:.55;cursor:not-allowed}
+  .reg-field select.placeholder{color:#7fb59c}
+  .reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  .reg-submit{width:100%;margin-top:8px;padding:15px;border:none;border-radius:12px;background:var(--green-light);color:#fff;
+    font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:9px;
+    box-shadow:0 10px 24px rgba(12,166,107,.35)}
+  .reg-submit:hover{background:#11bd7c}
+  .reg-note{font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5}
+  @media(max-width:480px){.reg-grid{grid-template-columns:1fr}}
   .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer}
 
   /* ===== Hero ===== */
@@ -162,6 +192,16 @@
   .contact-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
   .no-big{font-size:24px;font-weight:800;color:var(--gold);letter-spacing:1px;margin:6px 0 2px}
   .map-note{display:flex;align-items:center;gap:10px;background:rgba(3,28,20,.5);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px;margin-top:6px;color:var(--muted);font-size:14px}
+
+  /* ===== Bottom CTA / Register section ===== */
+  .cta-section{text-align:center;padding:60px 0}
+  .cta-box{background:linear-gradient(160deg,rgba(229,196,85,.16),rgba(12,166,107,.12));border:1px solid rgba(229,196,85,.4);
+    border-radius:26px;padding:46px 30px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .cta-box:before{content:"";position:absolute;inset:14px;border:1px dashed rgba(255,255,255,.2);border-radius:18px;pointer-events:none}
+  .cta-box h2{font-size:clamp(26px,3.4vw,40px);font-weight:800;margin:0 0 10px}
+  .cta-box h2 span{color:var(--gold)}
+  .cta-box p{color:var(--muted);font-size:17px;max-width:560px;margin:0 auto 26px}
+  .cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:6px}
 
   /* ===== Footer ===== */
   footer{background:#02160f;border-top:1px solid rgba(255,255,255,.08);padding:40px 0 26px;margin-top:20px}
@@ -319,6 +359,7 @@
       <a href="#pricing">मूल्य</a>
       <a href="#autopay">ऑटो पे / EMI</a>
       <a href="#contact">संपर्क</a>
+      <a class="nav-cta reg" href="#" onclick="openReg();return false;">📝 रजिस्टर करें</a>
       <a class="nav-cta" href="tel:+919053222712">📞 अभी कॉल करें</a>
     </nav>
     <button class="menu-toggle" id="menuBtn" aria-label="Menu">☰</button>
@@ -341,6 +382,7 @@
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>नए &amp; चालू डिवाइस</span>
         </div>
         <div class="hero-actions">
+          <a class="btn btn-gold" href="#" onclick="openReg();return false;">📝 रजिस्टर करें</a>
           <a class="btn btn-green" href="https://wa.me/919053222712">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.5 14.4c-.2.7-1.3 1.3-1.8 1.4-.5.1-1.1.1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.9-1.3-4.8-4.2-4.9-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.4.4-.2.7.2.4.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4.1.1.1.7-.1 1.4z"/></svg>
             WhatsApp पर पूछताछ
@@ -531,6 +573,23 @@
 
 </main>
 
+<!-- ===== Bottom Register CTA ===== -->
+<section class="cta-section">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>अपनी दुकान को <span>Phone Shield</span> के साथ शुरू करें</h2>
+      <p>रजिस्टर करें और अपनी details सीधे हमारे पास पहुँचाएँ — बिना किसी झंझट के।</p>
+      <div class="cta-actions">
+        <a class="btn btn-gold" href="#" onclick="openReg();return false;">📝 अभी रजिस्टर करें</a>
+        <a class="btn btn-green" href="https://wa.me/919053222712">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.5 14.4c-.2.7-1.3 1.3-1.8 1.4-.5.1-1.1.1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.9-1.3-4.8-4.2-4.9-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.4.4-.2.7.2.4.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4.1.1.1.7-.1 1.4z"/></svg>
+          WhatsApp पर पूछताछ
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== Footer ===== -->
 <footer>
   <div class="wrap">
@@ -570,6 +629,39 @@
 <button id="toTop" aria-label="ऊपर जाएँ">↑</button>
 
 <!-- ===== Lock Animation Modal ===== -->
+<div class="modal" id="regModal" onclick="if(event.target===this)closeReg()">
+  <div class="reg-modal-box" role="dialog" aria-modal="true">
+    <button class="modal-close" onclick="closeReg()" aria-label="बंद करें">×</button>
+    <div class="reg-head">
+      <svg class="shield-ic" viewBox="0 0 64 64"><use href="#logoSym"/></svg>
+      <h3>Phone Shield रजिस्टरेशन 🛡🔐</h3>
+      <p>Please provide following details for <b style="color:var(--gold)">Phone Shield</b> — आपकी details सीधे हमारे पास आएँगी।</p>
+    </div>
+    <form id="regForm" onsubmit="submitReg(event)">
+      <div class="reg-grid">
+        <div class="reg-field"><label>Your Name *</label><input type="text" id="rName" required placeholder="अपना नाम लिखें"></div>
+        <div class="reg-field"><label>Phone Number *</label><input type="tel" id="rPhone" required placeholder="10 अंकों का मोबाइल नंबर"></div>
+      </div>
+      <div class="reg-field"><label>Email ID *</label><input type="email" id="rEmail" required placeholder="you@example.com"></div>
+      <div class="reg-field"><label>Mobile Shop Name *</label><input type="text" id="rShop" required placeholder="दुकान का नाम"></div>
+      <div class="reg-grid">
+        <div class="reg-field"><label>State *</label><select id="rState" required><option value="">-- राज्य चुनें --</option></select></div>
+        <div class="reg-field"><label>Your City *</label><select id="rCity" required disabled><option value="">-- पहले राज्य चुनें --</option></select></div>
+      </div>
+      <div class="reg-field"><label>Shop Address *</label><input type="text" id="rAddr" required placeholder="दुकान का पूरा पता"></div>
+      <div class="reg-grid">
+        <div class="reg-field"><label>Pincode *</label><input type="text" id="rPin" required placeholder="6 अंकों का पिनकोड" maxlength="6" inputmode="numeric"></div>
+        <div class="reg-field"><label>Device I'D &amp; Password <span>(Key)</span></label><input type="text" id="rKey" placeholder="अगर है तो लिखें (optional)"></div>
+      </div>
+      <button type="submit" class="reg-submit" id="regSubmitBtn">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.5 14.4c-.2.7-1.3 1.3-1.8 1.4-.5.1-1.1.1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.9-1.3-4.8-4.2-4.9-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.4.4-.2.7.2.4.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.7 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4.1.1.1.7-.1 1.4z"/></svg>
+        रजिस्टर करें
+      </button>
+      <p class="reg-note">"रजिस्टर करें" दबाते ही आपकी Details सीधे हमारे पास सुरक्षित दर्ज हो जाएँगी। 🔐</p>
+    </form>
+  </div>
+</div>
+
 <div class="modal" id="lockModal" onclick="if(event.target===this)closeLockModal()">
   <div class="modal-box" role="dialog" aria-modal="true">
     <button class="modal-close" onclick="closeLockModal()" aria-label="बंद करें">×</button>
@@ -868,7 +960,148 @@
     document.body.style.overflow='';
     clearTimeout(lockTimer);
   }
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLockModal(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeLockModal(); closeReg(); } });
+
+  // === Registration Modal (details -> Google Sheet / WhatsApp) ===
+  const REG_WHATSAPP='919053222712'; // owner WhatsApp number (backup)
+  // 👇 Yahan apna Google Apps Script Web App URL daalein (baad mein).
+  //    Abhi khali hai, isliye form WhatsApp par fallback karega.
+  const GOOGLE_ENDPOINT='https://script.google.com/macros/s/AKfycbzPtyOW4H8LpZZHSx-KEdE7Hwa3VMpZRBAgmtPSak6YSCZ-JAlpToQpCd4nNDEDl5wz/exec';
+  function openReg(){
+    document.getElementById('regModal').classList.add('open');
+    document.body.style.overflow='hidden';
+    populateStates();
+  }
+
+  // ===== India States & Cities (dependent dropdown) =====
+  const STATE_CITIES={
+  "Andhra Pradesh":["Visakhapatnam","Vijayawada","Guntur","Nellore","Kurnool","Rajahmundry","Tirupati","Kakinada","Warangal","Anantapur","Eluru","Ongole","Kadapa","Vizianagaram","Srikakulam","Machilipatnam","Chittoor","Adoni","Tenali","Proddatur","Hindupur","Madanapalle","Gudivada","Bhimavaram"],
+  "Arunachal Pradesh":["Itanagar","Tawang","Ziro","Pasighat","Naharlagun","Bomdila","Along","Tezu","Roing","Yupia"],
+  "Assam":["Guwahati","Dibrugarh","Silchar","Jorhat","Nagaon","Tezpur","Bongaigaon","Tinsukia","Goalpara","Baripada","Nalbari","Sibsagar","Dhubri","North Lakhimpur","Barpeta","Karimganj","Hailakandi"],
+  "Bihar":["Patna","Gaya","Bhagalpur","Muzaffarpur","Darbhanga","Purnia","Ara","Begusarai","Katihar","Chhapra","Hajipur","Saharsa","Sitamarhi","Motihari","Siwan","Bettiah","Nawada","Kishanganj","Samastipur","Madhubani","Forbesganj","Munger","Jamalpur","Jehanabad"],
+  "Chhattisgarh":["Raipur","Bhilai","Bilaspur","Korba","Durg","Jagdalpur","Rajnandgaon","Ambikapur","Raigarh","Chirmiri","Dhamtari","Mahasamund","Kawardha","Janjgir"],
+  "Goa":["Panaji","Margao","Vasco da Gama","Mapusa","Ponda","Curchorem","Bicholim","Valpoi"],
+  "Gujarat":["Ahmedabad","Surat","Vadodara","Rajkot","Gandhinagar","Junagadh","Bhavnagar","Jamnagar","Anand","Surendranagar","Bharuch","Nadiad","Morbi","Mehsana","Valsad","Porbandar","Patan","Amreli","Navsari","Gandhidham","Bhuj","Veraval","Gondal","Botad","Palanpur","Dahod","Godhra","Modasa"],
+  "Haryana":["Faridabad","Gurugram","Panipat","Ambala","Yamunanagar","Rohtak","Hisar","Karnal","Sonipat","Kurukshetra","Jind","Sirsa","Bhiwani","Kaithal","Fatehabad","Palwal","Rewari","Narnaul","Mahendragarh","Nuh","Panchkula","Jhajjar","Charkhi Dadri","Tohana","Hansi","Ellenabad"],
+  "Himachal Pradesh":["Shimla","Manali","Dharamshala","Mandi","Solan","Kullu","Hamirpur","Bilaspur","Una","Kangra","Palampur","Nahan","Chamba","Sundernagar","Nurpur","Baddi","Paonta Sahib"],
+  "Jharkhand":["Ranchi","Jamshedpur","Dhanbad","Bokaro","Deoghar","Hazaribagh","Giridih","Ramgarh","Gumla","Chatra","Dumka","Pakur","Godda","Chaibasa","Sahibganj"],
+  "Karnataka":["Bengaluru","Mysuru","Mangaluru","Belagavi","Hubli","Dharwad","Kalaburagi","Tumakuru","Udupi","Davangere","Ballari","Vijayapura","Shivamogga","Raichur","Bidar","Chitradurga","Hassan","Mandya","Kolar","Gadag","Bagalkot","Chikkamagaluru","Haveri","Karwar","Ramanagara","Hosur"],
+  "Kerala":["Thiruvananthapuram","Kochi","Kozhikode","Kollam","Thrissur","Kannur","Palakkad","Alappuzha","Malappuram","Kottayam","Kasaragod","Pathanamthitta","Idukki","Wayanad"],
+  "Madhya Pradesh":["Bhopal","Indore","Gwalior","Jabalpur","Ujjain","Sagar","Dewas","Satna","Rewa","Chhindwara","Vidisha","Hoshangabad","Betul","Shivpuri","Mandsaur","Guna","Seoni","Dewas","Khargone","Ratlam","Burhanpur","Morena","Bhind","Tikamgarh","Chhatarpur","Dhar","Khandwa"],
+  "Maharashtra":["Mumbai","Pune","Nagpur","Nashik","Thane","Aurangabad","Solapur","Kolhapur","Navi Mumbai","Amravati","Latur","Akola","Nanded","Sangli","Dhule","Ahmednagar","Jalgaon","Satara","Ratnagiri","Chandrapur","Navi Mumbai","Wardha","Yavatmal","Osmanabad","Parbhani","Buldhana","Hingoli","Vasai-Virar","Bhiwandi","Malegaon","Ichalkaranji"],
+  "Manipur":["Imphal","Thoubal","Bishnupur","Churachandpur","Ukhrul","Senapati","Kakching"],
+  "Meghalaya":["Shillong","Tura","Cherrapunji","Jowai","Nongstoin","Baghmara"],
+  "Mizoram":["Aizawl","Lunglei","Champhai","Serchhip","Kolasib","Saiha"],
+  "Nagaland":["Kohima","Dimapur","Mokokchung","Tuensang","Wokha","Zunheboto","Zunheboto","Phek"],
+  "Odisha":["Bhubaneswar","Cuttack","Rourkela","Berhampur","Sambalpur","Puri","Balasore","Bargarh","Bhadrak","Baripada","Jeypore","Angul","Koraput","Rayagada","Keonjhar","Jharsuguda"],
+  "Punjab":["Ludhiana","Amritsar","Jalandhar","Patiala","Bathinda","Mohali","Ferozpur","Pathankot","Hoshiarpur","Batala","Moga","Abohar","Malerkotla","Khanna","Sangrur","Barnala","Fazilka","Kapurthala","Rajpura","Muktsar"],
+  "Rajasthan":["Jaipur","Jodhpur","Udaipur","Kota","Bikaner","Ajmer","Bhilwara","Alwar","Sikar","Jhunjhunu","Churu","Sriganganagar","Bharatpur","Pali","Tonk","Banswara","Baran","Jhalawar","Chittorgarh","Nagaur","Sawai Madhopur","Dausa","Karauli","Hanumangarh","Behror","Nimbahera"],
+  "Sikkim":["Gangtok","Namchi","Gyalshing","Mangan"],
+  "Tamil Nadu":["Chennai","Coimbatore","Madurai","Salem","Tiruchirappalli","Tirunelveli","Vellore","Erode","Thoothukudi","Dindigul","Thanjavur","Tiruppur","Karur","Nagercoil","Kumbakonam","Cuddalore","Hosur","Kanchipuram","Tiruvannamalai","Villupuram","Ramanathapuram","Sivakasi","Karaikudi","Neyveli","Pollachi","Tiruvallur","Ambattur","Avadi"],
+  "Telangana":["Hyderabad","Warangal","Nizamabad","Karimnagar","Khammam","Ramagundam","Mahbubnagar","Nalgonda","Adilabad","Suryapet","Siddipet","Miryalaguda","Jagtial","Bhadrachalam","Kothagudem"],
+  "Tripura":["Agartala","Udaipur","Dharmanagar","Kailashahar","Belonia","Ambassa"],
+  "Uttar Pradesh":["Lucknow","Kanpur","Ghaziabad","Agra","Varanasi","Meerut","Prayagraj","Bareilly","Aligarh","Moradabad","Saharanpur","Gorakhpur","Noida","Jhansi","Muzaffarnagar","Vrindavan","Mathura","Ayodhya","Rampur","Sitapur","Etawah","Firozabad","Shahjahanpur","Bulandshahr","Bahraich","Azamgarh","Ballia","Budaun","Hapur","Modinagar","Sambhal","Lakhimpur Kheri","Bijnor","Amroha","Pilibhit","Mainpuri","Fatehpur","Banda","Mirzapur","Jaunpur","Ghazipur","Deoria","Basti","Sultanpur","Barabanki","Hardoi","Unnao","Faizabad"],
+  "Uttarakhand":["Dehradun","Haridwar","Rishikesh","Roorkee","Haldwani","Nainital","Rudrapur","Kashipur","Bageshwar","Pithoragarh","Almora","Mussoorie","Kotdwar","Rudraprayag","Chamoli"],
+  "West Bengal":["Kolkata","Howrah","Durgapur","Asansol","Siliguri","Bardhaman","Kharagpur","Berhampore","Malda","Krishnanagar","Jalpaiguri","Baharampur","Kalyani","Haldia","Darjeeling","Cooch Behar","Raiganj","Bankura","Purulia","Midnapore","Suri","Alipurduar","Barrackpore","Barasat"],
+  "Andaman and Nicobar Islands":["Port Blair","Havelock Island","Neil Island"],
+  "Chandigarh":["Chandigarh","Mohali"],
+  "Dadra and Nagar Haveli and Daman and Diu":["Silvassa","Daman","Diu"],
+  "Delhi":["New Delhi","Delhi","Dwarka","Rohini","Karol Bagh","Saket","Janakpuri","Laxmi Nagar","Vasant Kunj","Punjabi Bagh","Mayur Vihar","Dwarka"],
+  "Jammu and Kashmir":["Srinagar","Jammu","Anantnag","Baramulla","Katra","Udhampur","Kathua","Pulwama","Kulgam","Shopian","Rajouri"],
+  "Ladakh":["Leh","Kargil","Nubra"],
+  "Lakshadweep":["Kavaratti","Minicoy","Agatti"],
+  "Puducherry":["Puducherry","Karaikal","Mahe","Yanam"]
+  };
+  function populateStates(){
+    const st=document.getElementById('rState');
+    if(st.dataset.loaded) return;
+    const sel='<option value="">-- राज्य चुनें --</option>';
+    let html=sel;
+    Object.keys(STATE_CITIES).forEach(function(s){ html+='<option value="'+s+'">'+s+'</option>'; });
+    st.innerHTML=html;
+    st.dataset.loaded='1';
+    st.addEventListener('change',function(){ onStateChange(); });
+  }
+  function onStateChange(){
+    const st=document.getElementById('rState');
+    const city=document.getElementById('rCity');
+    const state=st.value;
+    city.disabled=false;
+    city.classList.remove('placeholder');
+    let html='<option value="">-- शहर चुनें --</option>';
+    if(state && STATE_CITIES[state]){
+      STATE_CITIES[state].forEach(function(c){ html+='<option value="'+c+'">'+c+'</option>'; });
+    }
+    city.innerHTML=html;
+  }
+  function closeReg(){
+    document.getElementById('regModal').classList.remove('open');
+    document.body.style.overflow='';
+  }
+  function submitReg(e){
+    e.preventDefault();
+    const name=document.getElementById('rName').value.trim();
+    const phone=document.getElementById('rPhone').value.trim();
+    const email=document.getElementById('rEmail').value.trim();
+    const shop=document.getElementById('rShop').value.trim();
+    const city=document.getElementById('rCity').value.trim();
+    const state=document.getElementById('rState').value.trim();
+    const addr=document.getElementById('rAddr').value.trim();
+    const pin=document.getElementById('rPin').value.trim();
+    const key=document.getElementById('rKey').value.trim();
+
+    const msg='🙏 *Phone Shield - Customer Registration* 🛡🔐\n\n'+
+      '👤 *Name:* '+name+'\n'+
+      '📞 *Phone Number:* '+phone+'\n'+
+      '✉️ *Email ID:* '+email+'\n'+
+      '🏪 *Mobile Shop Name:* '+shop+'\n'+
+      '🏙️ *Your City:* '+city+'\n'+
+      '🗺️ *State:* '+state+'\n'+
+      '📍 *Shop Address:* '+addr+'\n'+
+      '📮 *Pincode:* '+pin+
+      (key?('\n🔑 *Device ID & Password (Key):* '+key):'')+'\n\n'+
+      '— Sent from Phone Shield Website';
+
+    const payload={
+      name:name, phone:phone, email:email, shop:shop,
+      city:city, state:state, addr:addr, pin:pin, key:key
+    };
+    const btn=e.target.querySelector('.reg-submit');
+
+    // === Path 1: Google Sheet (auto-save, no Send needed) ===
+    if(GOOGLE_ENDPOINT && GOOGLE_ENDPOINT.indexOf('YOUR')===-1){
+      fetch(GOOGLE_ENDPOINT,{
+        method:'POST',
+        mode:'no-cors',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify(payload)
+      }).catch(()=>{});
+      if(btn){ btn.textContent='✅ रजिस्ट्रेशन सफल!'; btn.style.background='#0ca66b'; }
+      setTimeout(()=>{
+        closeReg();
+        const f=document.getElementById('regForm'); if(f) f.reset();
+        resetCityField();
+        if(btn){ btn.textContent='📝 रजिस्टर करें'; btn.style.background=''; }
+      },2000);
+      return;
+    }
+
+    // === Path 2: WhatsApp (fallback) ===
+    const url='https://wa.me/'+REG_WHATSAPP+'?text='+encodeURIComponent(msg);
+    window.open(url,'_blank');
+    if(btn){ btn.textContent='✅ Details भेजी गईं!'; btn.style.background='#0ca66b'; }
+    setTimeout(()=>{
+      closeReg();
+      const f=document.getElementById('regForm');
+      if(f) f.reset();
+      resetCityField();
+      if(btn){ btn.textContent='📝 WhatsApp पर Details भेजें'; btn.style.background=''; }
+    },2000);
+  }
+  function resetCityField(){
+    const city=document.getElementById('rCity');
+    if(city){ city.innerHTML='<option value="">-- पहले राज्य चुनें --</option>'; city.disabled=true; city.classList.add('placeholder'); }
+  }
 
   // === Mobile menu ===
   const menuBtn=document.getElementById('menuBtn');

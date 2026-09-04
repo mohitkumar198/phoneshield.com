@@ -148,6 +148,15 @@
   .feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
   .feat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:22px 20px;transition:.25s;position:relative;overflow:hidden}
   .feat:hover{background:rgba(73,217,151,.08);border-color:rgba(73,217,151,.4);transform:translateY(-3px)}
+  .feat.super-lock{grid-column:1/-1;background:radial-gradient(120% 120% at 50% 0,rgba(229,196,85,.22),rgba(255,255,255,.04) 60%),
+    linear-gradient(160deg,rgba(229,196,85,.14),rgba(73,217,151,.06));border:2px solid rgba(229,196,85,.55);
+    box-shadow:0 0 30px rgba(229,196,85,.2);position:relative;overflow:hidden}
+  .feat.super-lock:before{content:"\1F9D9";position:absolute;right:14px;bottom:6px;font-size:66px;opacity:.1;transform:rotate(-6deg)}
+  .feat.super-lock:hover{border-color:var(--gold-deep);box-shadow:0 0 44px rgba(229,196,85,.4)}
+  .super-modal-cta{display:none;margin:16px auto 2px;width:100%;max-width:300px;text-align:center;background:linear-gradient(135deg,#e5c455,#caa53c);color:#1b0f06;
+    font-weight:800;padding:14px 20px;border-radius:40px;text-decoration:none;box-shadow:0 0 26px rgba(229,196,85,.55);font-size:16px}
+  .super-modal-cta:hover{filter:brightness(1.06)}
+  .modal-box.show-super-cta .super-modal-cta{display:block}
   .feat svg{width:30px;height:30px;color:var(--accent);margin-bottom:12px}
   .feat.warn svg{color:var(--gold)}
   .feat b{font-size:16px;display:block;margin-bottom:4px}
@@ -174,6 +183,35 @@
   .price.best{border:2px solid var(--gold-deep);background:linear-gradient(160deg,rgba(229,196,85,.14),rgba(255,255,255,.05))}
   .price .flag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold-deep);color:var(--ink);font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 12px;border-radius:30px;text-transform:uppercase}
   .offer-strip{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;background:linear-gradient(90deg,rgba(229,196,85,.18),rgba(73,217,151,.12));border:1px solid rgba(229,196,85,.35);border-radius:14px;padding:15px 20px;margin-top:22px;text-align:center}
+
+  /* ===== Super Key (premium, unique) ===== */
+  .super-key-banner{margin-top:24px;padding:30px 24px 26px;border-radius:24px;text-align:center;position:relative;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% -10%,rgba(229,196,85,.28),rgba(0,0,0,.1) 70%),linear-gradient(160deg,#1b0f06,#3a2403 55%,#1b0f06);
+    border:2px solid rgba(229,196,85,.6);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(229,196,85,.25)}
+  .super-key-banner:before{content:"\1F9D9";position:absolute;top:-20px;right:20px;font-size:120px;opacity:.12;transform:rotate(-8deg)}
+  .super-key-banner:after{content:"";position:absolute;inset:7px;border:1px solid rgba(229,196,85,.25);border-radius:18px;pointer-events:none}
+  .sk-top{display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:6px}
+  .sk-top svg{width:20px;height:20px}
+  .sk-badge{display:inline-block;background:var(--gold-deep);color:#1b0f06;font-weight:900;padding:6px 16px;border-radius:40px;font-size:13px;letter-spacing:1px;text-transform:uppercase;box-shadow:0 0 24px rgba(229,196,85,.7);margin-bottom:12px}
+  .sk-title{font-size:clamp(34px,6vw,56px);font-weight:900;color:#fff;line-height:1.05;margin:0 0 8px;text-shadow:0 4px 30px rgba(229,196,85,.5)}
+  .sk-title span{background:linear-gradient(90deg,#ffe9a8,#e5c455,#f6d878);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sk-tag{font-size:19px;color:#ffe9a8;font-weight:700;margin:0 0 4px}
+  .sk-desc{max-width:640px;margin:0 auto 18px;color:#e9d9af;font-size:16.5px;line-height:1.6}
+  .sk-price-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+  .sk-price{font-size:clamp(38px,5vw,54px);font-weight:900;color:var(--gold);line-height:1}
+  .sk-price small{font-size:18px;color:#fff;font-weight:600}
+  .sk-was{text-decoration:line-through;color:#a98b57;font-size:20px;font-weight:700}
+  .sk-feats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:22px}
+  .sk-feats span{display:inline-flex;align-items:center;gap:7px;background:rgba(229,196,85,.12);border:1px solid rgba(229,196,85,.4);color:#ffe9a8;padding:9px 15px;border-radius:30px;font-size:14px;font-weight:600}
+  .sk-feats span svg{width:16px;height:16px;color:var(--accent)}
+  .sk-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .sk-cta .btn{min-width:200px}
+  @media(max-width:560px){
+    .super-key-banner{padding:26px 16px 22px}
+    .sk-title{font-size:38px}
+    .sk-desc{font-size:15px}
+    .sk-feats span{font-size:13px}
+  }
   .offer-strip b{color:var(--gold)}
   .offer-strip span{color:var(--muted);font-size:15px}
 
@@ -465,6 +503,7 @@
         <p>ग्राहक के डिवाइस को सुरक्षित रखें और EMI कलेक्शन को बिल्कुल आसान बनाएं — हर सुविधा पर टैप करके एनीमेशन देखें।</p>
       </div>
       <div class="feat-grid">
+        <div class="feat super-lock reveal lock-click" onclick="openModal('super')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M9 13l-2 8 5-3 5 3-2-8"/><path d="M12 5v4M10 7h4"/></svg><b>👑 Super Key <em style="color:var(--gold)">· 100% Secure</em></b><p>हमारी सबसे शक्तिशाली advance की — जो <b style="color:var(--gold)">कभी नहीं हटेगी</b>. सिर्फ़ ₹500 में.</p><span class="lock-hint">▶ टैप करके विवरण देखें</span></div>
         <div class="feat reveal lock-click" onclick="openModal('lock')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><b>फोन लॉक / अनलॉक</b><p>डिवाइस को रिमोट से कभी भी लॉक या अनलॉक करें।</p><span class="lock-hint">▶ टैप करके एनीमेशन देखें</span></div>
         <div class="feat warn lock-click" onclick="openModal('emi')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>EMI अलर्ट</b><p>EMI की तारीख से पहले स्वचालित सूचना — समय पर कलेक्शन।</p><span class="lock-hint">▶ टैप करके एनीमेशन देखें</span></div>
         <div class="feat lock-click" onclick="openModal('location')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><b>लोकेशन जांच</b><p>डिवाइस की वास्तविक स्थिति हर समय जानें।</p><span class="lock-hint">▶ टैप करके एनीमेशन देखें</span></div>
@@ -536,6 +575,34 @@
           <b>🎉 सीमित समय का रिटेलर ऑफर</b> — <span>केवल 1 महीने के लिए मान्य। अवसर न चूकें!</span>
         </div>
         <a class="btn btn-gold" href="https://wa.me/919053222712?text=Namaste%20%F0%9F%99%8F%20Mujhe%20Phone%20Shield%20ke%20Retailer%20Offer%20me%20Keys%20order%20karni%20hai%20%F0%9F%91%88" target="_blank" rel="noopener">ऑर्डर करें</a>
+      </div>
+
+      <!-- ===== Super Key (100% secure, premium) ===== -->
+      <div class="super-key-banner reveal">
+        <div class="sk-top">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm-3 5a3 3 0 1 1 6 0v3H9V6zm3 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg>
+          हमारी Advance सेवा
+        </div>
+        <div class="sk-badge">⚡ 100% Secure · कभी नहीं हटेगी</div>
+        <div class="sk-title">Phone Shield <span>Super Key</span></div>
+        <p class="sk-tag">आपके फोन की सबसे शक्तिशाली सुरक्षा 🔐</p>
+        <p class="sk-desc">Super Key हमारी सबसे उन्नत और 100% सुरक्षित की है — जो <b style="color:#ffe9a8">कभी नहीं हटेगी</b>. यह खास रिटेलर पार्टनर्स के लिए बनाई गई premium सेवा है, जिसका इस्तेमाल कर आप अपने customer को अटूट फोन-लॉक सुरक्षा दे सकते हैं।</p>
+        <div class="sk-price-row">
+          <span class="sk-price">₹500</span>
+          <span class="sk-was">₹999</span>
+          <small style="color:#e9d9af;font-weight:600">/ Super Key (एकमुश्त)</small>
+        </div>
+        <div class="sk-feats">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>कभी नहीं हटेगी</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>100% सुरक्षित</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>Advance लॉक</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>प्राथमिकता सपोर्ट</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5"/></svg>आजीवन मान्यता</span>
+        </div>
+        <div class="sk-cta">
+          <a class="btn btn-gold" href="https://wa.me/919053222712?text=Namaste%20%F0%9F%99%8F%20Mujhe%20Phone%20Shield%20%F0%9F%91%91%20Super%20Key%20(100%25%20secure)%20order%20karni%20hai%20%E2%80%94%20%F0%9F%92%B0%20%C2%B5500%20%E0%A4%AE%E0%A5%87%E0%A4%82%20%E0%A4%8C%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%82" target="_blank" rel="noopener">🛒 Super Key ऑर्डर करें</a>
+          <a class="btn btn-ghost" href="#pricing">👑 अधिक जानें</a>
+        </div>
       </div>
     </div>
   </section>
@@ -913,10 +980,32 @@
       </svg></div>
     </div>
 
+    <!-- ===== SUPER KEY scene (crown + shining key) ===== -->
+    <div class="scene" id="sc-super">
+      <div class="lock-stage"><svg viewBox="0 0 180 180">
+        <defs><linearGradient id="gSuper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe9a8"/><stop offset=".5" stop-color="#e5c455"/><stop offset="1" stop-color="#caa53c"/></linearGradient></defs>
+        <circle class="glow" cx="90" cy="90" r="78" fill="none" stroke="url(#gSuper)" stroke-width="3"/>
+        <circle class="ring-anim" cx="90" cy="90" r="70" fill="none" stroke="rgba(229,196,85,.6)" stroke-width="3" stroke-dasharray="8 12" stroke-linecap="round"/>
+        <g class="floaty a">
+          <path d="M55 46 l10 16 l12 -14 l13 14 l12 -16 l8 20 H45 z" fill="url(#gSuper)" stroke="#ffefc0" stroke-width="2"/>
+          <circle cx="52" cy="72" r="4" fill="#ffe9a8"/><circle cx="66" cy="72" r="4" fill="#ffe9a8"/>
+          <circle cx="80" cy="72" r="4" fill="#ffe9a8"/><circle cx="94" cy="72" r="4" fill="#ffe9a8"/>
+          <circle cx="108" cy="72" r="4" fill="#ffe9a8"/>
+        </g>
+        <g class="a">
+          <rect x="78" y="96" width="24" height="52" rx="8" fill="#0d2a1e" stroke="url(#gSuper)" stroke-width="3.5"/>
+          <circle cx="90" cy="112" r="6" fill="url(#gSuper)"/>
+          <rect x="87" y="120" width="6" height="18" rx="3" fill="#49d997"/>
+          <rect class="beam a" x="78" y="96" width="24" height="4" rx="2" fill="rgba(240,211,109,.9)"/>
+        </g>
+      </svg></div>
+    </div>
+
     <div class="lock-title" id="lockTitle">सुरक्षा लॉक चालू</div>
     <div class="lock-msg" id="lockMsg">डिवाइस सुरक्षित कर दिया गया है…</div>
     <div class="lock-badge" id="lockBadge">🔐 Phone Shield सुरक्षा</div>
     <div class="lock-sub" id="lockSub">लॉक / अनलॉक एनीमेशन • डिवाइस पर नियंत्रण</div>
+    <a class="super-modal-cta" id="superModalCta" href="https://wa.me/919053222712?text=Namaste%20%F0%9F%99%8F%20Mujhe%20Phone%20Shield%20%F0%9F%91%91%20Super%20Key%20(100%25%20secure)%20order%20karni%20hai%20%E2%80%94%20%F0%9F%92%B0%20%C2%B5500" target="_blank" rel="noopener">🛒 Super Key ऑर्डर करें · ₹500</a>
     <div class="success-overlay"><div class="tick">✓</div></div>
   </div>
 </div>
@@ -993,6 +1082,11 @@
       active:'सुरक्षित PIN सेट',activeMsg:'सुरक्षित PIN कॉन्फ़िगर हो रहा है…',
       success:'✅ सुरक्षित PIN सेट',successMsg:'डिवाइस के लिए नया सुरक्षित PIN लगाया गया।',
       badge:'🔢 सिक्योर PIN सेट',sub:'PIN एनीमेशन • सुरक्षित नियंत्रण'
+    },
+    super:{
+      active:'👑 Super Key सक्रिय',activeMsg:'100% सुरक्षित Super Key लगाई जा रही है…',
+      success:'✅ Super Key लग गई',successMsg:'आपके फोन की सुरक्षा अब कभी नहीं हटेगी (100% सुरक्षित)।',
+      badge:'👑 Super Key · 100% Secure',sub:'Advance फोन-लॉक • कभी नहीं हटेगी • ₹500'
     }
   };
   let lockTimer=null;
@@ -1014,6 +1108,7 @@
     badge.textContent=info.badge;
     badge.className='lock-badge b-gold';
     sub.textContent=info.sub;
+    m.classList.toggle('show-super-cta', type==='super');
     m.classList.add('open');
     document.body.style.overflow='hidden';
     clearTimeout(lockTimer);

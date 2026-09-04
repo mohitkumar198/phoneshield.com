@@ -228,6 +228,22 @@
   .play-txt b{font-size:18px}
   @media(max-width:560px){.app-inner{flex-direction:column;text-align:center}.app-text p{text-align:center}.play-txt{text-align:left}}
 
+  /* ===== Welcome sound / speak button ===== */
+  #welcomeAudio{display:none}
+  .sound-btn{position:fixed;bottom:20px;left:20px;z-index:80;display:inline-flex;align-items:center;gap:8px;
+    background:linear-gradient(135deg,rgba(229,196,85,.95),rgba(229,196,85,.85));color:#05240f;border:none;
+    padding:11px 16px;border-radius:40px;font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.4);
+    transition:transform .2s}
+  .sound-btn:hover{transform:scale(1.05)}
+  .sound-btn.playing{background:linear-gradient(135deg,#0ca66b,#111);color:#fff}
+  .sound-btn svg{width:20px;height:20px;flex:none}
+  .sound-btn .wave{display:inline-flex;align-items:flex-end;gap:2px;height:16px}
+  .sound-btn .wave i{width:3px;background:currentColor;border-radius:2px;display:inline-block;animation:wv 1s infinite ease-in-out}
+  .sound-btn .wave i:nth-child(1){animation-delay:0s;height:60%}
+  .sound-btn .wave i:nth-child(2){animation-delay:.15s;height:100%}
+  .sound-btn .wave i:nth-child(3){animation-delay:.3s;height:45%}
+  @keyframes wv{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1)}}
+
   /* ===== Footer ===== */
   footer{background:#02160f;border-top:1px solid rgba(255,255,255,.08);padding:40px 0 26px;margin-top:20px}
   .foot-top{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:30px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -1174,6 +1190,33 @@
     entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
   },{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // === Welcome voice (auto-play on load, sound toggle) ===
+  const welcomeAudio=document.getElementById('welcomeAudio');
+  const soundBtn=document.getElementById('soundBtn');
+  let soundStarted=false;
+  function tryPlaySound(){
+    if(!welcomeAudio) return;
+    welcomeAudio.play().then(()=>{ soundStarted=true; soundBtn.classList.add('playing'); soundBtn.innerHTML='🔇 <span>आवाज़ बंद करें</span>'; })
+      .catch(()=>{ /* autoplay blocked — user can tap the button */ });
+  }
+  // Attempt to play as soon as the page opens
+  window.addEventListener('load',tryPlaySound);
+  // Some browsers block autoplay; fall back to first interaction (tap/scroll/click)
+  ['pointerdown','touchstart','scroll','keydown'].forEach(ev=>{
+    document.addEventListener(ev,function once(){ tryPlaySound(); document.removeEventListener(ev,once); },{passive:true});
+  });
+  welcomeAudio.addEventListener('ended',()=>{ soundBtn.classList.remove('playing'); soundBtn.innerHTML='🔊 <span>आवाज़ सुनें</span>'; });
+  soundBtn.addEventListener('click',()=>{
+    if(welcomeAudio.paused){ tryPlaySound(); } else { welcomeAudio.pause(); welcomeAudio.currentTime=0; soundBtn.classList.remove('playing'); soundBtn.innerHTML='🔊 <span>आवाज़ सुनें</span>'; }
+  });
 </script>
+
+<!-- ===== Welcome voice audio ===== -->
+<audio id="welcomeAudio" src="welcome.mp3" preload="auto"></audio>
+<button class="sound-btn" id="soundBtn" aria-label="स्वागत आवाज़">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h4l5 5V5L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7.5 7.5 0 0 1 0 13.4v2.1a9.5 9.5 0 0 0 0-17.6z"/></svg>
+  <span>आवाज़ सुनें</span>
+</button>
 </body>
 </html>

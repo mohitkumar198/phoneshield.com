@@ -1286,25 +1286,47 @@
   },{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // === Welcome voice (auto-play on load, sound toggle) ===
-  const welcomeAudio=document.getElementById('welcomeAudio');
-  const soundBtn=document.getElementById('soundBtn');
-  let soundStarted=false;
-  function tryPlaySound(){
-    if(!welcomeAudio) return;
-    welcomeAudio.play().then(()=>{ soundStarted=true; soundBtn.classList.add('playing'); soundBtn.innerHTML='🔇 <span>आवाज़ बंद करें</span>'; })
-      .catch(()=>{ /* autoplay blocked — user can tap the button */ });
+  // === Welcome voice (auto-play + sound toggle) ===
+  // Run only after the DOM is ready so the <audio> & button exist.
+  function initWelcomeSound(){
+    const welcomeAudio=document.getElementById('welcomeAudio');
+    const soundBtn=document.getElementById('soundBtn');
+    if(!welcomeAudio || !soundBtn) return;
+    function refresh(playing){
+      soundBtn.classList.toggle('playing',playing);
+      soundBtn.innerHTML=playing
+        ? '🔇 <span>आवाज़ बंद करें</span>'
+        : '🔊 <span>आवाज़ सुनें</span>';
+    }
+    let played=false;
+    function tryPlay(){
+      if(played) return;            // play only once
+      if(!welcomeAudio.paused) { played=true; refresh(true); return; }
+      if(!welcomeAudio.src) welcomeAudio.src='welcome.mp3';
+      var p=welcomeAudio.play();
+      if(p && p.then){
+        p.then(()=>{ played=true; refresh(true); })
+         .catch(()=>{});            // autoplay blocked by browser
+      } else { played=true; refresh(true); }
+    }
+    welcomeAudio.addEventListener('ended',()=>{ played=false; welcomeAudio.currentTime=0; refresh(false); });
+    // Try to autoplay on load (works where allowed)
+    window.addEventListener('load',tryPlay);
+    // Fallback: play on the very first user interaction (tap/scroll/click/key)
+    ['pointerdown','touchstart','scroll','keydown'].forEach(ev=>{
+      document.addEventListener(ev,function once(){ tryPlay(); document.removeEventListener(ev,once); },{passive:true});
+    });
+    // Sound toggle button
+    soundBtn.addEventListener('click',()=>{
+      if(welcomeAudio.paused){ tryPlay(); }
+      else { welcomeAudio.pause(); welcomeAudio.currentTime=0; refresh(false); }
+    });
   }
-  // Attempt to play as soon as the page opens
-  window.addEventListener('load',tryPlaySound);
-  // Some browsers block autoplay; fall back to first interaction (tap/scroll/click)
-  ['pointerdown','touchstart','scroll','keydown'].forEach(ev=>{
-    document.addEventListener(ev,function once(){ tryPlaySound(); document.removeEventListener(ev,once); },{passive:true});
-  });
-  welcomeAudio.addEventListener('ended',()=>{ soundBtn.classList.remove('playing'); soundBtn.innerHTML='🔊 <span>आवाज़ सुनें</span>'; });
-  soundBtn.addEventListener('click',()=>{
-    if(welcomeAudio.paused){ tryPlaySound(); } else { welcomeAudio.pause(); welcomeAudio.currentTime=0; soundBtn.classList.remove('playing'); soundBtn.innerHTML='🔊 <span>आवाज़ सुनें</span>'; }
-  });
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',initWelcomeSound);
+  } else {
+    initWelcomeSound();
+  }
 </script>
 
 <!-- ===== Welcome voice audio ===== -->
